@@ -1,13 +1,15 @@
 import { ObjectId } from 'mongodb';
-import { getDb } from './db';
+import { getDatabase } from './db';
 
 interface TvShow {
   name: string;
-  platformIds: ObjectId[]; //mongos ids are objectIds and not strings
+  platformIds: string[]; //mongos ids are objectIds and not strings, changed it to
+  genre: string;
+  maturityRating: 'G'| 'PG' | 'PG-13' | 'R' | 'NC-17';
 }
 
 const getCollection = async () => {
-  const db = await getDb();
+  const db = await getDatabase();
   return db.collection<TvShow>('tv-shows');
 };
 
